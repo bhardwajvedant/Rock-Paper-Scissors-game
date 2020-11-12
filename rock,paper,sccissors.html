@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Flex-Box</title>
+        <link rel="stylesheet" href="cs.css">
+    </head>
+    <body>
+           <div class="bigcontainer">
+
+
+            <!-- <div id="heading">
+                <h1>Challange 1:Age in days</h1>
+            </div>
+            <div id="btns">
+                <button id="clickme" onclick="ageindays()">Click Me</button>
+                <button id="reset" onclick="remove()">Reset</button>
+            </div>
+            <div class="bigcontainer1">
+                
+                <div id="result"></div>
+
+            </div>
+           
+
+
+
+            <div id="heading">
+                <h1>Challange 2:Image Generator</h1>
+            </div>
+
+            <div id="btn">
+                <button id="btnid" onclick="generate()">Generate Gif </button>
+           </div>
+
+            <div id="gif">
+               
+            </div> -->
+
+            <div>
+                   <h2>Challange 3: Rock Paper Scissor</h2>
+            </div>
+
+            <div id="rps">
+                <div id="rockdiv">
+                    <img src="Images/rock.png" width=150 height=150 id="rock" onclick="gamerps(this)">
+                </div>
+                <div id="paperdiv">
+                    <img src="Images/paper.jpg" width=150 height=150 id="paper" onclick="gamerps(this)">
+                </div>
+
+                <div id="scissordiv">
+                    <img src="Images/scissors.png" width=150 height=150 id="scissor" onclick="gamerps(this)">
+                </div>
+            </div>
+    
+
+
+
+
+        </div>
+    </body>
+
+    <script type="text/javascript">
+
+    function gamerps(yourchoice)
+    {
+      
+      var humanchoice,botchoice;
+      humanchoice=yourchoice.id;
+
+      botchoice=numberToChoice(randToRpsInt());
+    console.log(`computer choice:${botchoice}`);
+     results = decidewinner(humanchoice,botchoice);
+     console.log(results);
+
+     message=finalmessage(results);
+     console.log(message);
+    rpsFrontEnd(yourchoice.id, botchoice ,message)
+      
+    }
+
+    function randToRpsInt(){
+        return Math.floor(Math.random()*3);
+    }
+    function numberToChoice(number){
+        var opt=['rock', 'paper','scissor'];
+        return opt[number];
+    }
+
+    function decidewinner(yourchoice, computerchoice)
+    {
+        var rpsdatabase={
+            'rock': {'scissor':1 ,'rock':0.5,'paper':0},
+            'paper': {'rock':1 ,'paper':0.5,'scissor':0},
+            'scissor': {'paper':1 ,'scissor':0.5,'rock':0},
+        };
+
+        var yourscore = rpsdatabase[yourchoice][computerchoice];
+        var computerscore = rpsdatabase[computerchoice][yourchoice];
+        return[yourscore,computerscore]
+    }
+
+    function finalmessage([yourscore, computerscore]){
+        if(yourscore===0){
+            return{'message':'You lost', 'color': 'red'};
+        }else if(yourscore === 0.5){
+            return{'message':'You tied','color':'yellow'};
+        }else{
+            return{'message':'You won','color':'green'};
+        }
+
+    }
+
+
+function rpsFrontEnd(humanimagechoice, botimagechoice, finalmessage)
+{
+
+    var imagedatabase={
+        'rock':document.getElementById('rock').src,
+        'paper':document.getElementById('paper').src,
+        'scissor':document.getElementById('scissor').src
+    }
+ 
+
+    document.getElementById('rock').remove();
+    document.getElementById('paper').remove();
+    document.getElementById('scissor').remove();
+    
+
+    var humandiv=document.createElement('div');
+    var botdiv=document.createElement('div');
+    var messagediv=document.createElement('div');
+
+    humandiv.innerHTML = "<img src='"+imagedatabase[humanimagechoice]+"' height=150 width=150 style='box-shadow:0px 10px 50px rgba(37,50,233,1)'>";
+    messagediv.innerHTML="<h1 style='color: "+finalmessage['color']+"; font-size:60px; padding:30px'>" +finalmessage['message']+"</h1>"
+    botdiv.innerHTML = "<img src='"+imagedatabase[botimagechoice]+"' height=150 width=150 style='box-shadow:0px 10px 50px rgba(233,38,24,1)'>";
+   
+    document.getElementById('rps').appendChild(humandiv);
+    document.getElementById('rps').appendChild(messagediv);
+    document.getElementById('rps').appendChild(botdiv);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // function generate()
+    // {
+    //     var img=document.createElement('img');
+    //     img.setAttribute('src','https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=719&q=80');
+    //     img.setAttribute('style','width:150px');
+    //     var app=document.getElementById('gif');
+    //     app.appendChild(img);
+    // }
+
+
+    // function ageindays()
+    // {
+    //     var result=document.getElementById("result");
+    //     var year=prompt("enter year of your birth");
+    //     var aid=(2020-year)*365;
+    //     var h2=document.createElement("h2");
+    //     var ved=document.createTextNode(`you are ${aid} days old`);
+    //     h2.appendChild(ved);
+    //     result.appendChild(h2);  
+    // }
+
+    // function remove()
+    // {
+    //     document.getElementById("result").remove();
+    // }
+
+    </script>
+</html>
